@@ -7,12 +7,13 @@ import ReduxThunk from 'redux-thunk';
 import Homepage from './pages/home'
 import Article from './pages/article';
 import "./App.css";
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
 class App extends Component {
   render() {
     
     return (
-      <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
+      <Provider store={createStoreWithMiddleware(reducers)}>
         <Router>
           <Switch>
             <Route exact path='/' component={Homepage} />

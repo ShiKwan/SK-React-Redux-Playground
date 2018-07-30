@@ -12,7 +12,7 @@ class articleList extends Component {
         console.log("Articles : " , article);
         return _.map(article, art => {
             return (
-                article ?
+                article.length > 0 ?
                     <li className='list-group-item' key={art.id}>
                         <ul>
                             <li> Title : {art.title } </li>
@@ -21,7 +21,7 @@ class articleList extends Component {
                         </ul>
                         
                     </li>
-            :
+                :
                     <div>Loading..</div>
             )
         })
@@ -29,7 +29,7 @@ class articleList extends Component {
     render(){
         return(
             <div>
-                article list
+                <h1>Article list</h1>
                 {this.renderRow(this.props.articles)}
             </div>
         );
@@ -38,8 +38,8 @@ class articleList extends Component {
 
 const mapStateToProps = state => {
     console.log(state);
-    const articles = _.map(state.articles, (val, title) => {
-        return {...val, title };
+    const articles = _.map(state.articles, (val) => {
+        return {...val };
     });
     return { articles }
 }

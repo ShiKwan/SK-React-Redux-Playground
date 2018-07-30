@@ -4,7 +4,7 @@ import {
 
 } from '../actions/types';
 
-export default (state = null, action) => {
+export default (state = {}, action) => {
     switch (action.type) {
         case ARTICLES_FETCH_SUCCESS:
             return action.payload;

@@ -17,3 +17,12 @@ export const articleFetch = () => {
         });
     }
 };
+
+export function createArticle(values, callback) {
+    const request = axios.post('/api/article', values)
+                    .then( () => callback());
+        return{
+            type: ARTICLE_CREATE,
+            payload: request,
+        }
+};
