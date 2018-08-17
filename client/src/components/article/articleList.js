@@ -1,5 +1,6 @@
 import React , { Component } from 'react'; 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { articleFetch } from '../../actions/ArticleActions';
 
@@ -8,21 +9,23 @@ class articleList extends Component {
         this.props.articleFetch() ;
     }
 
-    renderRow(article) {
-        console.log("Articles : " , article);
-        return _.map(article, art => {
+    renderRow() {
+        console.log("Articles : " , this.props.articles);
+        return _.map(this.props.articles, article => {
             return (
-                article.length > 0 ?
-                    <li className='list-group-item' key={art.id}>
+                    <li className='list-group-item' key={article._id}>
                         <ul>
-                            <li> Title : {art.title } </li>
-                            <li> Category : {art.category} </li>
-                            <li> Content : {art.content} </li>
+                            <li> 
+                                Title :
+                                <Link to={`/article/${article._id}`}>
+                                    {article.title } 
+                                </Link>
+                            </li>
+                            <li> Category : {article.category} </li>
+                            <li> Content : {article.content} </li>
                         </ul>
                         
                     </li>
-                :
-                    <div>Loading..</div>
             )
         })
     }
@@ -38,10 +41,10 @@ class articleList extends Component {
 
 const mapStateToProps = state => {
     console.log(state);
-    const articles = _.map(state.articles, (val) => {
+    /* const articles = _.map(state.articles, (val) => {
         return {...val };
-    });
-    return { articles }
+    }); */
+    return { articles : state.articles }
 }
 
 export default connect(mapStateToProps, {articleFetch} )(articleList);

@@ -13,7 +13,7 @@ module.exports = {
     },
     findById : function (req, res) {
         db.Article
-            .find(req.params.id)
+            .find({ _id : req.params.id})
             .then( article => res.json(article))
             .catch(err => {
                 console.log(err);
